@@ -61,3 +61,19 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "rspec-rails", "~> 7.1"
+gem "rspec-its", "~> 2.0"
+
+gem "rubocop-rspec", "~> 3.2"
+gem "rubocop", "~> 1.68"
+gem "rubocop-factory_bot", "~> 2.26"
+gem "rubocop-md", "~> 1.2"
+gem "rubocop-migration", "~> 0.5.1"
+gem "rubocop-performance", "~> 1.23"
+gem "rubocop-rails", "~> 2.27"
+gem "rubocop-thread_safety", "~> 0.6.0"
+
+gem "phlex-rails", "~> 1.2"
+
+gem "tailwindcss-rails", "~> 3.0"
