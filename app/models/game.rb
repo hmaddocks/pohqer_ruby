@@ -1,7 +1,7 @@
 class Game < ApplicationRecord
   has_many :players, dependent: :destroy
   has_many :rounds, dependent: :destroy
-  
+
   validates :owner_name, presence: true
 
   def current_round
