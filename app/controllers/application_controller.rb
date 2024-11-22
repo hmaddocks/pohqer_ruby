@@ -15,15 +15,8 @@ class ApplicationController < ActionController::Base
     @current_game ||= find_current_game
   end
 
-  def find_current_player
-    # First, check if there's a player ID in the session for the current game
-    if current_game && session["game_#{current_game.id}_player_id"]
-      current_game.players.find_by(id: session["game_#{current_game.id}_player_id"])
-    end
-  end
-
   def find_current_game
-    # Attempt to find the current game from the request parameters
+    # Find the current game from the request parameters
     if params[:controller] == "games" && params[:action] == "show"
       Game.find(params[:id])
     elsif params[:game_id]
@@ -36,9 +29,23 @@ class ApplicationController < ActionController::Base
     nil
   end
 
+  def find_current_player
+    # Find the current player for the current game
+    if current_game
+      session_key = "game_#{current_game.id}_player_id"
+      current_game.players.find_by(id: session[session_key])
+    end
+  end
+
   def set_current_player(player)
     # Set the current player for a specific game in the session
     return unless player && player.game
-    session["game_#{player.game.id}_player_id"] = player.id
+    session_key = "game_#{player.game.id}_player_id"
+    session[session_key] = player.id
+    
+    # Debug logging
+    Rails.logger.debug "Setting current player: Player ID #{player.id}, Game ID #{player.game.id}"
+    Rails.logger.debug "Session key: #{session_key}"
+    Rails.logger.debug "Session value: #{session[session_key]}"
   end
 end

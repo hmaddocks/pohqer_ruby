@@ -7,7 +7,13 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @current_round = @game.current_round
-    render Games::Show.new(game: @game, current_round: @current_round)
+    @current_player = current_player
+
+    render Games::Show.new(
+      game: @game,
+      current_round: @current_round,
+      current_player: @current_player
+    )
   end
 
   def new
@@ -19,8 +25,12 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
 
     if @game.save
-      @game.players.create!(name: @game.owner_name)
+      player = @game.players.create!(name: @game.owner_name)
       @game.start_new_round
+
+      # Set the current player in the session for this game
+      session["game_#{@game.id}_player_id"] = player.id
+
       redirect_to @game, notice: "Game was successfully created."
     else
       render :new, status: :unprocessable_entity
