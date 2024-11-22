@@ -50,11 +50,15 @@ RSpec.describe Player, type: :model do
       expect(vote.score).to eq(8)
     end
 
-    it "updates existing vote if already exists" do
+    it "updates an existing vote" do
+      # First vote
       first_vote = player.vote_in_round(round, 5)
-      second_vote = player.vote_in_round(round, 8)
-      expect(first_vote.id).to eq(second_vote.id)
-      expect(second_vote.score).to eq(8)
+      expect(first_vote.score).to eq(5)
+
+      # Update vote
+      updated_vote = player.vote_in_round(round, 8)
+      expect(updated_vote.id).to eq(first_vote.id)
+      expect(updated_vote.score).to eq(8)
     end
   end
 
@@ -63,18 +67,22 @@ RSpec.describe Player, type: :model do
     let(:round) { create(:round, game: game) }
     let(:player) { create(:player, game: game) }
 
-    context "when player has voted in the round" do
-      let!(:vote) { player.vote_in_round(round, 5) }
-
-      it "returns the vote" do
-        expect(player.vote_for_round(round)).to eq(vote)
-      end
+    it "returns nil when no vote exists" do
+      expect(player.vote_for_round(round)).to be_nil
     end
 
-    context "when player has not voted in the round" do
-      it "returns nil" do
-        expect(player.vote_for_round(round)).to be_nil
-      end
+    it "returns the vote for a specific round" do
+      vote = create(:vote, player: player, round: round, score: 5)
+      expect(player.vote_for_round(round)).to eq(vote)
+    end
+
+    it "returns the correct vote when multiple rounds exist" do
+      another_round = create(:round, game: game)
+      vote = create(:vote, player: player, round: round, score: 5)
+      another_vote = create(:vote, player: player, round: another_round, score: 8)
+
+      expect(player.vote_for_round(round)).to eq(vote)
+      expect(player.vote_for_round(another_round)).to eq(another_vote)
     end
   end
 end
