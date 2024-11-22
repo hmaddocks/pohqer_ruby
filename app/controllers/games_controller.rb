@@ -38,6 +38,8 @@ class GamesController < ApplicationController
     @player = @game.players.build(player_params)
 
     if @player.save
+      # Set the current player in the session
+      set_current_player(@player)
       redirect_to @game, notice: "Successfully joined the game."
     else
       render :join, status: :unprocessable_entity

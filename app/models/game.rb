@@ -15,4 +15,8 @@ class Game < ApplicationRecord
   def voting_in_progress?
     current_round&.voting_in_progress?
   end
+
+  def owner
+    players.find_by(name: owner_name)
+  end
 end
