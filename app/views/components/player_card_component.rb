@@ -8,7 +8,7 @@ class PlayerCardComponent < Phlex::HTML
   def template
     div(class: player_card_classes) do
       div(class: "font-medium") { @player.name }
-      
+
       if @current_round&.voting_in_progress?
         if @vote
           div(class: "text-sm text-green-500") { "Voted" }

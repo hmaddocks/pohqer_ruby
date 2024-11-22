@@ -2,7 +2,7 @@ class Player < ApplicationRecord
   belongs_to :game
   has_many :votes, dependent: :destroy
   has_many :rounds, through: :votes
-  
+
   validates :name, presence: true
 
   def vote_in_round(round, score)

@@ -7,7 +7,7 @@ class RoundResultsComponent < Phlex::HTML
     div(class: "space-y-6") do
       div(class: "text-center") do
         h3(class: "text-lg font-semibold mb-2") { "Results" }
-        
+
         if @round.votes_count > 0
           div(class: "text-3xl font-bold text-blue-500") do
             plain "Average: #{@round.average_score}"

@@ -12,7 +12,7 @@ class Games::New < ApplicationView
       form_with(model: @game, class: "space-y-4") do |form|
         div do
           form.label :owner_name, class: "block mb-2"
-          form.text_field :owner_name, 
+          form.text_field :owner_name,
             required: true,
             class: "w-full px-3 py-2 border rounded",
             placeholder: "Your Name"
@@ -20,13 +20,13 @@ class Games::New < ApplicationView
 
         div do
           form.label :title, class: "block mb-2"
-          form.text_field :title, 
+          form.text_field :title,
             class: "w-full px-3 py-2 border rounded",
             placeholder: "Game Title (Optional)"
         end
 
         div do
-          form.submit "Create Game", 
+          form.submit "Create Game",
             class: "w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
         end
       end

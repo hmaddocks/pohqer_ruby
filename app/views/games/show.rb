@@ -7,7 +7,7 @@ class Games::Show < ApplicationView
   def template
     div(class: "max-w-4xl mx-auto p-4") do
       render GameComponent.new(
-        game: @game, 
+        game: @game,
         current_player: nil  # You'll want to implement current_player logic later
       )
     end
