@@ -69,10 +69,10 @@ class Games::Show < ApplicationView
               )
             end
           else
-            # For other players, show their vote if exists
+            # For other players, only show if they voted or not
             existing_vote = player.vote_for_round(@current_round)
-            span(class: "player-vote") do
-              existing_vote ? existing_vote.score : "Not voted"
+            span(class: existing_vote ? "text-sm text-green-500" : "text-sm text-gray-500") do
+              existing_vote ? "Voted" : "Not voted"
             end
           end
         end
