@@ -44,7 +44,7 @@ class Games::Show < ApplicationView
               # Vote score dropdown
               select(
                 name: "score",
-                class: "form-select mr-2",
+                class: "form-select mr-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50",
                 required: true
               ) do
                 # Default option
@@ -65,7 +65,7 @@ class Games::Show < ApplicationView
               input(
                 type: "submit",
                 value: "Vote",
-                class: "btn btn-primary"
+                class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               )
             end
           else
