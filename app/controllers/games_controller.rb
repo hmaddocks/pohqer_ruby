@@ -30,6 +30,7 @@ class GamesController < ApplicationController
   def join
     @game = Game.find(params[:id])
     @player = @game.players.build
+    render Games::Join.new(game: @game, player: @player)
   end
 
   def add_player
