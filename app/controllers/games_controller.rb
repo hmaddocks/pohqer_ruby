@@ -5,7 +5,7 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(params[:id])
+    set_game
     @current_round = @game.current_round
     @current_player = current_player
 
@@ -38,13 +38,13 @@ class GamesController < ApplicationController
   end
 
   def join
-    @game = Game.find(params[:id])
+    set_game
     @player = @game.players.build
     render Games::Join.new(game: @game, player: @player)
   end
 
   def add_player
-    @game = Game.find(params[:id])
+    set_game
     @player = @game.players.build(player_params)
 
     if @player.save
@@ -57,6 +57,10 @@ class GamesController < ApplicationController
   end
 
   private
+
+  def set_game
+    @game = Game.find_by!(uuid: params[:id])
+  end
 
   def game_params
     params.require(:game).permit(:owner_name, :title)

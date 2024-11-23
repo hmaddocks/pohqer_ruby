@@ -21,7 +21,7 @@ class RoundsController < ApplicationController
   private
 
   def set_game
-    @game = Game.find(params[:game_id])
+    @game = Game.find_by!(uuid: params[:game_id])
   end
 
   def set_round
