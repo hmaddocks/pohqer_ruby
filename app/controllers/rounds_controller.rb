@@ -15,11 +15,7 @@ class RoundsController < ApplicationController
   def vote
     @player = @game.players.find(params[:player_id])
     @player.vote_in_round(@round, params[:score].to_i)
-
-    respond_to do |format|
-      format.html { redirect_to @game, notice: "Vote recorded." }
-      format.turbo_stream { }
-    end
+    redirect_to @game, notice: "Vote recorded."
   end
 
   private

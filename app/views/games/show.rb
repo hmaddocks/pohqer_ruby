@@ -36,7 +36,8 @@ class Games::Show < ApplicationView
             form(
               method: "post",
               action: vote_game_round_path(@game, @current_round),
-              class: "vote-form inline-flex items-center"
+              class: "vote-form inline-flex items-center",
+              data: { turbo: false }
             ) do
               # Hidden inputs for form submission
               input(type: "hidden", name: "player_id", value: player.id)
