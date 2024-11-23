@@ -1,5 +1,6 @@
 class GameHeaderComponent < Phlex::HTML
   include Rails.application.routes.url_helpers
+  include Phlex::Rails::Helpers::Request
 
   def initialize(game:, current_player: nil)
     @game = game
@@ -21,13 +22,23 @@ class GameHeaderComponent < Phlex::HTML
         end
       end
 
-      div(class: "mt-4") do
-        button(
-          class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600",
-          data_controller: "clipboard",
-          data_action: "click->clipboard#copy",
-          data_clipboard_text_value: join_game_path(@game)
-        ) { "Copy Join Link" }
+      div(class: "mt-4 space-y-2") do
+        div(class: "text-sm text-gray-600") do
+          plain "Share this link with your team:"
+        end
+
+        div(class: "flex items-center gap-2") do
+          code(class: "flex-1 bg-gray-50 p-2 rounded text-sm font-mono break-all") do
+            plain join_game_url(@game, host: request.host_with_port)
+          end
+
+          button(
+            class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 whitespace-nowrap",
+            data_controller: "clipboard",
+            data_action: "click->clipboard#copy",
+            data_clipboard_text_value: join_game_url(@game, host: request.host_with_port)
+          ) { "Copy Link" }
+        end
       end
     end
   end
