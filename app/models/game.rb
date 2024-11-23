@@ -1,6 +1,7 @@
 class Game < ApplicationRecord
   has_many :players, dependent: :destroy
   has_many :rounds, dependent: :destroy
+  belongs_to :owner, class_name: 'Player'
 
   validates :owner_name, presence: true
 
@@ -14,9 +15,5 @@ class Game < ApplicationRecord
 
   def voting_in_progress?
     current_round&.voting_in_progress?
-  end
-
-  def owner
-    players.find_by(name: owner_name)
   end
 end

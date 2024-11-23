@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_01_16_000004) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_23_000546) do
   create_table "games", force: :cascade do |t|
     t.string "owner_name", null: false
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_id", null: false
+    t.index ["owner_id"], name: "index_games_on_owner_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -46,6 +48,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_01_16_000004) do
     t.index ["round_id"], name: "index_votes_on_round_id"
   end
 
+  add_foreign_key "games", "players", column: "owner_id"
   add_foreign_key "players", "games"
   add_foreign_key "rounds", "games"
   add_foreign_key "votes", "players"
