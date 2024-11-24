@@ -1,8 +1,85 @@
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-thread_safety
+  - rubocop-md
+  - rubocop-migration
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+Rails:
+  Enabled: true
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'README.md'
+    - '**/*.csv'
+
+Bundler/OrderedGems:
+  Enabled: true
+
+Layout/LineLength:
+  AutoCorrect: true
+  Max: 120
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+  - 'spec/**/*'
+
+Lint/MissingSuper:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 30
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*.rb
+    - app/api/**/*.rb
+
+Metrics/MethodLength:
+    CountAsOne:  ['array', 'hash', 'heredoc']
+    Max: 20
+
+Naming/VariableNumber:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/EagerEvaluationLogMessage:
+  Enabled: true
+
+RSpec/DescribeClass:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+  Max: 10
+
+RSpec/NestedGroups:
+  Enabled: true
+  Max: 10
+
+RSpec/ExpectChange:
+  Enabled: false
+  EnforcedStyle: 'block'
+
+RSpec/MessageSpies:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+  EnforcedStyle: double_quotes
+
+Style/Documentation:
+  Enabled: false
+
+Style/RedundantArrayConstructor:
+  Enabled: false
