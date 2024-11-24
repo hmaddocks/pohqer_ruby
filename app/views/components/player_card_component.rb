@@ -5,7 +5,7 @@ class PlayerCardComponent < Phlex::HTML
     @vote = @current_round&.votes&.find_by(player: player)
   end
 
-  def template
+  def view_template
     div(class: player_card_classes) do
       div(class: "font-medium") { @player.name }
 

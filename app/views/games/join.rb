@@ -4,7 +4,7 @@ class Games::Join < ApplicationView
     @player = player
   end
 
-  def template
+  def view_template
     div(class: "join-game-container") do
       h1 { "Join Game: #{@game.title}" }
 

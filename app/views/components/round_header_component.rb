@@ -6,7 +6,7 @@ class RoundHeaderComponent < Phlex::HTML
     @round = round
   end
 
-  def template
+  def view_template
     div(class: "flex justify-between items-center mb-6") do
       div do
         h2(class: "text-xl font-semibold") do

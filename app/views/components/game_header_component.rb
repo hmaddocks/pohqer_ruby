@@ -5,7 +5,7 @@ class GameHeaderComponent < Phlex::HTML
     @game = game
   end
 
-  def template
+  def view_template
     div(class: "mb-8") do
       h1(class: "text-3xl font-bold mb-2") do
         plain @game.title.presence || "Planning Poker Game"

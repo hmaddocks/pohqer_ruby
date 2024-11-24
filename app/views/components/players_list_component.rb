@@ -4,7 +4,7 @@ class PlayersListComponent < Phlex::HTML
     @current_round = current_round
   end
 
-  def template
+  def view_template
     div(class: "bg-white shadow rounded-lg p-6") do
       h3(class: "text-lg font-semibold mb-4") do
         plain "Players (#{@game.players.count})"

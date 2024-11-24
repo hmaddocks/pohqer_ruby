@@ -5,7 +5,7 @@ class Games::Index < ApplicationView
     @games = games
   end
 
-  def template
+  def view_template
     div(class: "min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8") do
       div(class: "max-w-5xl mx-auto space-y-12") do
         # Hero Section
@@ -16,7 +16,7 @@ class Games::Index < ApplicationView
           p(class: "max-w-2xl mx-auto text-xl text-gray-600") do
             plain "Make sprint planning collaborative and fun"
           end
-          
+
           # Primary CTA
           div(class: "mt-8") do
             link_to(
@@ -51,7 +51,7 @@ class Games::Index < ApplicationView
         if @games.any?
           div(class: "space-y-6") do
             h2(class: "text-2xl font-bold text-center text-gray-900") { "Active Games" }
-            
+
             div(class: "grid md:grid-cols-2 lg:grid-cols-3 gap-6") do
               @games.each do |game|
                 link_to(game_path(game), class: "block") do
@@ -65,7 +65,7 @@ class Games::Index < ApplicationView
                           div(class: "px-3 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full") { "Active" }
                         end
                       end
-                      
+
                       div(class: "flex items-center justify-between text-sm text-gray-500") do
                         div { plain "Created by #{game.owner_name}" }
                         div { plain "#{game.players.count} players" }

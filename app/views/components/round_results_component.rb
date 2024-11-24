@@ -3,7 +3,7 @@ class RoundResultsComponent < Phlex::HTML
     @round = round
   end
 
-  def template
+  def view_template
     div(class: "space-y-6") do
       div(class: "text-center") do
         h3(class: "text-lg font-semibold mb-2") { "Results" }

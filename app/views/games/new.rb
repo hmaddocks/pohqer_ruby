@@ -5,7 +5,7 @@ class Games::New < ApplicationView
     @game = game
   end
 
-  def template
+  def view_template
     div(class: "max-w-md mx-auto p-4") do
       h1(class: "text-2xl font-bold mb-6") { "Create New Planning Poker Game" }
 

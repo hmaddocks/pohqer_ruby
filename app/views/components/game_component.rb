@@ -5,7 +5,7 @@ class GameComponent < Phlex::HTML
     @current_round = game.current_round
   end
 
-  def template
+  def view_template
     div(class: "max-w-4xl mx-auto p-4") do
       render GameHeaderComponent.new(game: @game)
 

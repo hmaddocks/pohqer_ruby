@@ -9,7 +9,7 @@ class VotingComponent < Phlex::HTML
     @current_vote = @current_player&.vote_for_round(@round)
   end
 
-  def template
+  def view_template
     div(class: "grid grid-cols-4 gap-4", data_controller: "voting") do
       FIBONACCI_SCORES.each do |score|
         button_classes = [

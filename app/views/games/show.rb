@@ -5,7 +5,7 @@ class Games::Show < ApplicationView
     @current_player = current_player
   end
 
-  def template
+  def view_template
     div(class: "max-w-4xl mx-auto p-4") do
       render GameComponent.new(
         game: @game,

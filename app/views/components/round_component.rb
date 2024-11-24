@@ -4,7 +4,7 @@ class RoundComponent < Phlex::HTML
     @current_player = current_player
   end
 
-  def template
+  def view_template
     div(class: "bg-white shadow rounded-lg p-6 mb-8", data_controller: "round") do
       render RoundHeaderComponent.new(round: @round)
 
