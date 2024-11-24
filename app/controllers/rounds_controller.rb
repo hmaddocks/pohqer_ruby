@@ -3,7 +3,7 @@ class RoundsController < ApplicationController
   before_action :set_round, only: [ :finish, :vote ]
 
   def create
-    @round = @game.start_new_round(story_title: params[:story_title])
+    @round = @game.start_new_round(story_title: params[:round][:story_title])
     redirect_to @game, notice: "New round started."
   end
 

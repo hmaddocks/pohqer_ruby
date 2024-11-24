@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   # allow_browser versions: :modern
@@ -21,7 +23,7 @@ class ApplicationController < ActionController::Base
       Game.find_by!(uuid: params[:id])
     elsif params[:game_id]
       Game.find_by!(uuid: params[:game_id])
-    elsif params[:id] && [ "games", "rounds" ].include?(params[:controller])
+    elsif params[:id] && %w[games rounds].include?(params[:controller])
       # For nested resources like rounds
       Game.find_by!(uuid: params[:id])
     end
@@ -31,21 +33,22 @@ class ApplicationController < ActionController::Base
 
   def find_current_player
     # Find the current player for the current game
-    if current_game
-      session_key = "game_#{current_game.id}_player_id"
-      current_game.players.find_by(id: session[session_key])
-    end
+    return unless current_game
+
+    session_key = "game_#{current_game.id}_player_id"
+    current_game.players.find_by(id: session[session_key])
   end
 
   def set_current_player(player)
     # Set the current player for a specific game in the session
     return unless player && player.game
+
     session_key = "game_#{player.game.id}_player_id"
     session[session_key] = player.id
-    
+
     # Debug logging
-    Rails.logger.debug "Setting current player: Player ID #{player.id}, Game ID #{player.game.id}"
-    Rails.logger.debug "Session key: #{session_key}"
-    Rails.logger.debug "Session value: #{session[session_key]}"
+    Rails.logger.debug { "Setting current player: Player ID #{player.id}, Game ID #{player.game.id}" }
+    Rails.logger.debug { "Session key: #{session_key}" }
+    Rails.logger.debug { "Session value: #{session[session_key]}" }
   end
 end

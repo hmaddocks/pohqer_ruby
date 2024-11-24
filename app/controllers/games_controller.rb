@@ -56,6 +56,12 @@ class GamesController < ApplicationController
     end
   end
 
+  # def start_new_round
+  #   set_game
+  #   @game.start_new_round(story_title: params[:round][:story_title])
+  #   redirect_to @game, notice: "New round started!"
+  # end
+
   private
 
   def set_game

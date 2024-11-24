@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     member do
       get :join
       post :add_player
+      post :start_new_round
     end
 
     resources :rounds, only: [ :create ] do
