@@ -14,6 +14,15 @@ class Games::Show < ApplicationView
 
       # Voting section for current round
       voting_section if @current_round
+
+      # All rounds section
+      div(class: "mt-8") do
+        h2(class: "text-2xl font-bold mb-4") { "Game Rounds" }
+        
+        @game.rounds.order(created_at: :desc).each do |round|
+          render RoundSummaryComponent.new(round: round)
+        end
+      end
     end
   end
 
