@@ -13,10 +13,7 @@ class Games::Show < ApplicationView
       )
 
       # Voting section for current round
-      if @current_round
-
-        voting_section
-      end
+      voting_section if @current_round
     end
   end
 
