@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Games::Show < ApplicationView
   def initialize(game:, current_round:, current_player:)
     @game = game

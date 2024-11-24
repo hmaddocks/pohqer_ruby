@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Games::Join < ApplicationView
   def initialize(game:, player:)
     @game = game
@@ -15,7 +17,9 @@ class Games::Join < ApplicationView
       ) do
         if @player.errors.any?
           div(class: "rounded-md bg-red-50 p-4 mb-4") do
-            h2(class: "text-red-800 text-sm font-medium") { "#{pluralize(@player.errors.count, 'error')} prohibited this player from being saved:" }
+            h2(class: "text-red-800 text-sm font-medium") do
+              "#{pluralize(@player.errors.count, 'error')} prohibited this player from being saved:"
+            end
             ul(class: "mt-2 text-sm text-red-700") do
               @player.errors.full_messages.each do |message|
                 li { message }

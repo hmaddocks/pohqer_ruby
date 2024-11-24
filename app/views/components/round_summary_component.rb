@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RoundSummaryComponent < Phlex::HTML
   def initialize(round:)
     @round = round
@@ -7,7 +9,7 @@ class RoundSummaryComponent < Phlex::HTML
     div(class: "bg-white shadow rounded p-4 mb-2") do
       div(class: "flex justify-between items-center") do
         div(class: "font-medium") { @round.story_title }
-        
+
         if @round.votes.any?
           div(class: "flex space-x-4") do
             @round.votes.includes(:player).each do |vote|

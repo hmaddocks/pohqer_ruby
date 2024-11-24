@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Games::Index < ApplicationView
   include Phlex::Rails::Helpers::LinkTo
 
@@ -62,7 +64,9 @@ class Games::Index < ApplicationView
                           plain game.title.presence || "Planning Poker Game"
                         end
                         if game.current_round&.voting_in_progress?
-                          div(class: "px-3 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full") { "Active" }
+                          div(class: "px-3 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full") do
+                            "Active"
+                          end
                         end
                       end
 

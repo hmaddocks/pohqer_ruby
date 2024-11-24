@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RoundResultsComponent < Phlex::HTML
   def initialize(round:)
     @round = round

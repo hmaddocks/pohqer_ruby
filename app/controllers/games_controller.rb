@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GamesController < ApplicationController
   def index
     @games = Game.order(created_at: :desc)
@@ -32,8 +34,7 @@ class GamesController < ApplicationController
 
     session["game_#{@game.id}_player_id"] = @player.id
     redirect_to @game, notice: "Game was successfully created."
-  rescue StandardError => e
-    debugger
+  rescue StandardError
     render :new, status: :unprocessable_entity
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GameHeaderComponent < Phlex::HTML
   include Rails.application.routes.url_helpers
   include Phlex::Rails::Helpers::Request

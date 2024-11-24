@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlayersListComponent < Phlex::HTML
   def initialize(game:, current_round:)
     @game = game

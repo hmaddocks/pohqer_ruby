@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Vote < ApplicationRecord
-  FIBONACCI_SCORES = [ 1, 2, 3, 5, 8, 13, 21 ].freeze
+  FIBONACCI_SCORES = [1, 2, 3, 5, 8, 13, 21].freeze
 
   belongs_to :player
   belongs_to :round

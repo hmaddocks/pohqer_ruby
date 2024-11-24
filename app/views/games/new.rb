@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Games::New < ApplicationView
   include Phlex::Rails::Helpers::FormWith
 
@@ -13,21 +15,21 @@ class Games::New < ApplicationView
         div do
           form.label :owner_name, class: "block mb-2"
           form.text_field :owner_name,
-            required: true,
-            class: "w-full px-3 py-2 border rounded",
-            placeholder: "Your Name"
+                          required: true,
+                          class: "w-full px-3 py-2 border rounded",
+                          placeholder: "Your Name"
         end
 
         div do
           form.label :title, class: "block mb-2"
           form.text_field :title,
-            class: "w-full px-3 py-2 border rounded",
-            placeholder: "Game Title (Optional)"
+                          class: "w-full px-3 py-2 border rounded",
+                          placeholder: "Game Title (Optional)"
         end
 
         div do
           form.submit "Create Game",
-            class: "w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+                      class: "w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
         end
       end
     end

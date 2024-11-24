@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
 
   def set_current_player(player)
     # Set the current player for a specific game in the session
-    return unless player && player.game
+    return unless player&.game
 
     session_key = "game_#{player.game.id}_player_id"
     session[session_key] = player.id

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class RoundsController < ApplicationController
   before_action :set_game
-  before_action :set_round, only: [ :finish, :vote ]
+  before_action :set_round, only: %i[finish vote]
 
   def create
     @round = @game.start_new_round(story_title: params[:round][:story_title])
