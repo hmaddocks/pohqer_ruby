@@ -18,12 +18,12 @@ class ApplicationController < ActionController::Base
   def find_current_game
     # Find the current game from the request parameters
     if params[:controller] == "games" && params[:action] == "show"
-      Game.find(params[:id])
+      Game.find_by!(uuid: params[:id])
     elsif params[:game_id]
-      Game.find(params[:game_id])
+      Game.find_by!(uuid: params[:game_id])
     elsif params[:id] && [ "games", "rounds" ].include?(params[:controller])
       # For nested resources like rounds
-      Game.find(params[:id])
+      Game.find_by!(uuid: params[:id])
     end
   rescue ActiveRecord::RecordNotFound
     nil
