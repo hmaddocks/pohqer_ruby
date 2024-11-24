@@ -1,7 +1,7 @@
 class Game < ApplicationRecord
   has_many :players, dependent: :destroy
   has_many :rounds, dependent: :destroy
-  belongs_to :owner, class_name: 'Player'
+  belongs_to :owner, class_name: 'Player', optional: true
 
   validates :owner_name, presence: true
   validates :uuid, presence: true, uniqueness: true

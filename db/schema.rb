@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_23_022047) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_24_072610) do
   create_table "games", force: :cascade do |t|
     t.string "owner_name", null: false
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "owner_id", null: false
+    t.integer "owner_id"
     t.string "uuid", null: false
     t.index ["owner_id"], name: "index_games_on_owner_id"
     t.index ["uuid"], name: "index_games_on_uuid", unique: true

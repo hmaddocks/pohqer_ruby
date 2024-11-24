@@ -22,19 +22,19 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(game_params)
-
-    if @game.save
-      player = @game.players.create!(name: @game.owner_name)
+    Game.transaction do
+      @game = Game.create!(game_params)
+      @player = @game.players.create!(name: @game.owner_name)
+      @game.owner = @player
+      @game.save
       @game.start_new_round
-
-      # Set the current player in the session for this game
-      session["game_#{@game.id}_player_id"] = player.id
-
-      redirect_to @game, notice: "Game was successfully created."
-    else
-      render :new, status: :unprocessable_entity
     end
+
+    session["game_#{@game.id}_player_id"] = @player.id
+    redirect_to @game, notice: "Game was successfully created."
+  rescue StandardError => e
+    debugger
+    render :new, status: :unprocessable_entity
   end
 
   def join
