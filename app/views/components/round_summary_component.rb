@@ -12,7 +12,7 @@ class RoundSummaryComponent < Phlex::HTML
 
         if @round.votes.any?
           div(class: "flex space-x-4") do
-            @round.votes.includes(:player).each do |vote|
+            @round.votes.includes(:player).find_each do |vote|
               div(class: "text-sm text-gray-600") do
                 span { vote.player.name }
                 span(class: "mx-1") { ":" }
