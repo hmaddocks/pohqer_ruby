@@ -28,7 +28,8 @@ class RoundHeaderComponent < Phlex::HTML
         form(action: finish_game_round_path(@round.game, @round), method: "post") do
           button(
             type: "submit",
-            class: "bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+            class: "bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed",
+            disabled: @round.votes_count.zero?
           ) { "Finish Round" }
         end
       else
