@@ -8,6 +8,8 @@ class GamesController < ApplicationController
 
   def show
     set_game
+    redirect_to root_path and return unless @game
+
     @current_round = @game.current_round
     @current_player = current_player
 
@@ -59,7 +61,7 @@ class GamesController < ApplicationController
   private
 
   def set_game
-    @game = Game.find_by!(uuid: params[:id])
+    @game = Game.find_by(uuid: params[:id])
   end
 
   def game_params
