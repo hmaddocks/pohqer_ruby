@@ -49,19 +49,12 @@ class GamesController < ApplicationController
     @player = @game.players.build(player_params)
 
     if @player.save
-      # Set the current player in the session
       set_current_player(@player)
       redirect_to @game, notice: "Successfully joined the game."
     else
       render :join, status: :unprocessable_entity
     end
   end
-
-  # def start_new_round
-  #   set_game
-  #   @game.start_new_round(story_title: params[:round][:story_title])
-  #   redirect_to @game, notice: "New round started!"
-  # end
 
   private
 

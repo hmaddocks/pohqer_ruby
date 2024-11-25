@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PlayerCardComponent < Phlex::HTML
+class PlayerCardComponent < ApplicationComponent
   def initialize(player:, current_round:)
     @player = player
     @current_round = current_round

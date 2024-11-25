@@ -41,50 +41,12 @@ module Games
               end
               div(class: "space-y-3") do
                 h3(class: "text-lg font-semibold text-gray-900") { "2. Add Stories" }
-                p(class: "text-gray-600") { "Input the user stories you want to estimate" }
+                p(class: "text-gray-600") { "Each round estimate a User Story" }
               end
               div(class: "space-y-3") do
                 h3(class: "text-lg font-semibold text-gray-900") { "3. Vote Together" }
                 p(class: "text-gray-600") { "Team members vote simultaneously to avoid bias" }
               end
-            end
-          end
-
-          # Active Games Section
-          if @games.any?
-            div(class: "space-y-6") do
-              h2(class: "text-2xl font-bold text-center text-gray-900") { "Active Games" }
-
-              div(class: "grid md:grid-cols-2 lg:grid-cols-3 gap-6") do
-                @games.each do |game|
-                  link_to(game_path(game), class: "block") do
-                    div(class: "group bg-white rounded-xl p-6 border border-gray-200 hover:border-blue-200 hover:shadow-lg transition duration-200") do
-                      div do
-                        div(class: "flex items-center justify-between mb-4") do
-                          h3(class: "text-lg font-semibold text-gray-900 group-hover:text-blue-600") do
-                            plain game.title.presence || "Planning Poker Game"
-                          end
-                          if game.current_round&.voting_in_progress?
-                            div(class: "px-3 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full") do
-                              "Active"
-                            end
-                          end
-                        end
-
-                        div(class: "flex items-center justify-between text-sm text-gray-500") do
-                          div { plain "Created by #{game.owner_name}" }
-                          div { plain "#{game.players.count} players" }
-                        end
-                      end
-                    end
-                  end
-                end
-              end
-            end
-          else
-            div(class: "text-center py-12 bg-white rounded-xl border border-gray-200") do
-              h3(class: "text-lg font-medium text-gray-900 mb-2") { "No Active Games" }
-              p(class: "text-gray-500") { "Start a new game to begin estimation" }
             end
           end
         end

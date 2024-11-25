@@ -19,11 +19,15 @@ class Game < ApplicationRecord
   end
 
   def start_new_round(story_title: nil)
-    rounds.create!(story_title: story_title)
+    if story_title.present?
+      rounds.create!(story_title: story_title, status: :in_progress)
+    else
+      rounds.create!
+    end
   end
 
   def voting_in_progress?
-    current_round&.voting_in_progress?
+    current_round&.in_progress?
   end
 
   private

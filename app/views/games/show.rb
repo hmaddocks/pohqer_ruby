@@ -16,7 +16,7 @@ module Games
         )
 
         # All rounds section
-        div(class: "mt-8") do
+        div(class: "p-4") do
           h2(class: "text-2xl font-bold mb-4") { "Game Rounds" }
 
           @game.rounds.order(created_at: :desc).each do |round|

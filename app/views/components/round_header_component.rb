@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RoundHeaderComponent < Phlex::HTML
+class RoundHeaderComponent < ApplicationComponent
   include Phlex::Rails::Helpers::FormWith
   include Rails.application.routes.url_helpers
 
@@ -19,12 +19,14 @@ class RoundHeaderComponent < Phlex::HTML
           end
         end
 
-        div(class: "text-sm text-gray-500") do
-          plain "#{@round.votes_count} votes"
+        unless @round.pending?
+          div(class: "text-sm text-gray-500") do
+            plain "#{@round.votes_count} votes"
+          end
         end
       end
 
-      if @round.voting_in_progress?
+      if @round.in_progress? && !(@round == @round.game.rounds.first && @round.pending?)
         form(action: finish_game_round_path(@round.game, @round), method: "post") do
           button(
             type: "submit",
@@ -34,17 +36,31 @@ class RoundHeaderComponent < Phlex::HTML
         end
       else
         form(action: game_rounds_path(@round.game), method: "post", class: "flex gap-2") do
-          input(
-            type: "text",
-            name: "round[story_title]",
-            class: "rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm",
-            required: true,
-            placeholder: "Enter story title"
-          )
-          button(
-            type: "submit",
-            class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          ) { "Start New Round" }
+          if @round == @round.game.rounds.first && @round.pending?
+            input(
+              type: "text",
+              name: "round[story_title]",
+              class: "rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm",
+              required: true,
+              placeholder: "Enter story title"
+            )
+            button(
+              type: "submit",
+              class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            ) { "Start Round" }
+          else
+            input(
+              type: "text",
+              name: "round[story_title]",
+              class: "rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm",
+              required: true,
+              placeholder: "Enter story title"
+            )
+            button(
+              type: "submit",
+              class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            ) { "Start New Round" }
+          end
         end
       end
     end

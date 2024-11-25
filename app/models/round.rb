@@ -7,12 +7,18 @@ class Round < ApplicationRecord
 
   delegate :count, to: :votes, prefix: true
 
+  enum :status, { pending: 0, in_progress: 1, finished: 2 }
+
   def voting_in_progress?
-    !finished?
+    in_progress?
   end
 
   def finish!
-    update!(finished: true)
+    finished!
+  end
+
+  def start!(story_title)
+    update!(story_title: story_title, status: :in_progress)
   end
 
   def average_score

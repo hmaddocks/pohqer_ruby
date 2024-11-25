@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class GameComponent < Phlex::HTML
+class GameComponent < ApplicationComponent
   def initialize(game:, current_player: nil)
     @game = game
     @current_player = current_player
@@ -9,22 +9,27 @@ class GameComponent < Phlex::HTML
 
   def view_template
     div(class: "max-w-4xl mx-auto p-4") do
-      render GameHeaderComponent.new(
-        game: @game,
-        current_player: @current_player
-      )
-
-      if @current_round
-        render RoundComponent.new(
-          round: @current_round,
+      div(class: "py-4") do
+        render GameHeaderComponent.new(
+          game: @game,
           current_player: @current_player
         )
       end
 
-      render PlayersListComponent.new(
-        game: @game,
-        current_round: @current_round
-      )
+      if @current_round
+        div(class: "py-4") do
+          render RoundComponent.new(
+            round: @current_round,
+            current_player: @current_player
+          )
+        end
+      end
+      div(class: "py-4") do
+        render PlayersListComponent.new(
+          game: @game,
+          current_round: @current_round
+        )
+      end
     end
   end
 end
