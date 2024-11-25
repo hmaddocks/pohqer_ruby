@@ -2,6 +2,8 @@
 
 module Games
   class Show < ApplicationView
+    include Phlex::Rails::Helpers::TurboStreamFrom
+
     def initialize(game:, current_round:, current_player:)
       @game = game
       @current_round = current_round
@@ -9,6 +11,8 @@ module Games
     end
 
     def view_template
+      turbo_stream_from "game_#{@game.id}"
+
       div(class: "max-w-4xl mx-auto p-4") do
         render GameComponent.new(
           game: @game,

@@ -7,7 +7,7 @@ class PlayersListComponent < ApplicationComponent
   end
 
   def view_template
-    div(class: "bg-white shadow rounded-lg p-6") do
+    div(class: "bg-white shadow rounded-lg p-6", id: "game-#{@game.id}-players") do
       h3(class: "text-lg font-semibold mb-4") do
         plain "Players (#{@game.players.count})"
       end
