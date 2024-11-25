@@ -7,16 +7,20 @@ class RoundComponent < Phlex::HTML
   end
 
   def view_template
-    div(class: "bg-white shadow rounded-lg p-6 mb-8", data_controller: "round") do
-      render RoundHeaderComponent.new(round: @round)
+    div(class: "space-y-4") do
+      div(class: "bg-white shadow rounded-lg p-6", data_controller: "round") do
+        render RoundHeaderComponent.new(round: @round)
+      end
 
-      if @round.finished?
-        render RoundResultsComponent.new(round: @round)
-      else
-        render VotingComponent.new(
-          round: @round,
-          current_player: @current_player
-        )
+      div(class: "bg-white shadow rounded-lg p-6") do
+        if @round.finished?
+          render RoundResultsComponent.new(round: @round)
+        else
+          render VotingComponent.new(
+            round: @round,
+            current_player: @current_player
+          )
+        end
       end
     end
   end
