@@ -17,6 +17,13 @@ class RoundsController < ApplicationController
   def vote
     @player = @game.players.find(params[:player_id])
     @player.vote_in_round(@round, params[:score].to_i)
+
+    Turbo::StreamsChannel.broadcast_replace_to(
+      "game_#{@game.id}",
+      target: "game-#{@game.id}-players",
+      html: PlayersListComponent.new(game: @game, current_round: @game.current_round).call
+    )
+
     redirect_to @game, notice: "Vote recorded."
   end
 
