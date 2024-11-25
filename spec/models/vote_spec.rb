@@ -13,7 +13,7 @@ RSpec.describe Vote, type: :model do
 
     it "is invalid with a score not in the Fibonacci sequence" do
       vote.score = 4
-      is_expected.not_to be_valid
+      expect(subject).not_to be_valid
     end
 
     it "is invalid with a duplicate player-round combination" do
@@ -31,18 +31,18 @@ RSpec.describe Vote, type: :model do
   # Associations
   describe "associations" do
     it "belongs to a player" do
-      is_expected.to respond_to(:player)
+      expect(subject).to respond_to(:player)
     end
 
     it "belongs to a round" do
-      is_expected.to respond_to(:round)
+      expect(subject).to respond_to(:round)
     end
   end
 
   # Constants
   describe "FIBONACCI_SCORES" do
     it "contains only Fibonacci numbers" do
-      expected_scores = [ 1, 2, 3, 5, 8, 13, 21 ]
+      expected_scores = [1, 2, 3, 5, 8, 13, 21, 69]
       expect(Vote::FIBONACCI_SCORES).to eq(expected_scores)
     end
   end

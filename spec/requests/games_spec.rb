@@ -1,24 +1,26 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe "Games", type: :request do
   describe "POST /games" do
-    let(:valid_attributes) {
+    let(:valid_attributes) do
       {
         game: {
           owner_name: "John Doe"
         }
       }
-    }
+    end
 
     context "with valid parameters" do
       it "creates a new Game with an owner" do
-        expect {
+        expect do
           post games_path, params: valid_attributes
-        }.to change(Game, :count).by(1)
-          .and change(Player, :count).by(1)
+        end.to change(Game, :count).by(1)
+                                   .and change(Player, :count).by(1)
       end
 
-      it "sets up the owner relationship correctly" do
+      it "sets up the owner relationship correctly" do # rubocop:disable RSpec/MultipleExpectations
         post games_path, params: valid_attributes
         game = Game.last
         owner = game.owner
@@ -40,26 +42,26 @@ RSpec.describe "Games", type: :request do
       end
 
       it "creates a new round" do
-        expect {
+        expect do
           post games_path, params: valid_attributes
-        }.to change(Round, :count).by(1)
+        end.to change(Round, :count).by(1)
       end
     end
 
     context "with invalid parameters" do
-      let(:invalid_attributes) {
+      let(:invalid_attributes) do
         {
           game: {
             owner_name: "" # owner_name is required
           }
         }
-      }
+      end
 
       it "does not create a new Game" do
-        expect {
+        expect do
           post games_path, params: invalid_attributes
-        }.to change(Game, :count).by(0)
-          .and change(Player, :count).by(0)
+        end.to change(Game, :count).by(0)
+                                   .and change(Player, :count).by(0)
       end
 
       it "returns an unprocessable entity status" do
