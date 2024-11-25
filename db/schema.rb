@@ -24,7 +24,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_24_072610) do
 
   create_table "players", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "game_id", null: false
+    t.integer "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_players_on_game_id"
@@ -51,7 +51,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_24_072610) do
   end
 
   add_foreign_key "games", "players", column: "owner_id"
-  add_foreign_key "players", "games"
   add_foreign_key "rounds", "games"
   add_foreign_key "votes", "players"
   add_foreign_key "votes", "rounds"
