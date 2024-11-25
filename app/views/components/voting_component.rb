@@ -35,7 +35,7 @@ class VotingComponent < ApplicationComponent
             type: "submit",
             class: button_classes,
             disabled: @current_player.nil?
-          ) { score }
+          ) { score == 69 ? "∞" : score }
         end
       end
     end

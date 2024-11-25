@@ -24,10 +24,10 @@ class Round < ApplicationRecord
   def average_score
     return nil if votes.none?
 
-    votes.average(:score).to_f.round(1)
+    votes.where.not(score: 69).average(:score).to_f.round(1)
   end
 
   def all_players_voted?
-    votes_count == game.players.count
+    votes_count == game.players.count && votes_count.positive?
   end
 end
