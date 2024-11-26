@@ -3,6 +3,7 @@
 module Games
   class New < ApplicationView
     include Phlex::Rails::Helpers::FormWith
+    include Phlex::Rails::Helpers::Pluralize
 
     def initialize(game:)
       @game = game

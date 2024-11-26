@@ -14,10 +14,7 @@ class PlayersListComponent < ApplicationComponent
 
       div(class: "grid grid-cols-2 md:grid-cols-3 gap-4") do
         @game.players.each do |player|
-          render PlayerCardComponent.new(
-            player: player,
-            current_round: @current_round
-          )
+          render PlayerCardComponent.new(player: player, current_round: @current_round)
         end
       end
     end

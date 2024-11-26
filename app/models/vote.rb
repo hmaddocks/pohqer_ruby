@@ -8,4 +8,6 @@ class Vote < ApplicationRecord
 
   validates :score, inclusion: { in: FIBONACCI_SCORES }
   validates :player_id, uniqueness: { scope: :round_id }
+
+  delegate :name, to: :player, prefix: true
 end

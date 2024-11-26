@@ -23,11 +23,7 @@ class VotingComponent < ApplicationComponent
           end
         ].join(" ")
 
-        form(
-          action: vote_game_round_path(@round.game, @round),
-          method: "post",
-          class: "contents"
-        ) do
+        form(action: vote_game_round_path(@round.game, @round), method: "post", class: "contents") do
           input(type: "hidden", name: "player_id", value: @current_player&.id)
           input(type: "hidden", name: "score", value: score)
 

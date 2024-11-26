@@ -45,10 +45,5 @@ class ApplicationController < ActionController::Base
 
     session_key = "game_#{player.game.id}_player_id"
     session[session_key] = player.id
-
-    # Debug logging
-    Rails.logger.debug { "Setting current player: Player ID #{player.id}, Game ID #{player.game.id}" }
-    Rails.logger.debug { "Session key: #{session_key}" }
-    Rails.logger.debug { "Session value: #{session[session_key]}" }
   end
 end

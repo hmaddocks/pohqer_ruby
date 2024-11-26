@@ -17,10 +17,7 @@ class RoundComponent < ApplicationComponent
           if @round.finished?
             render RoundResultsComponent.new(round: @round)
           else
-            render VotingComponent.new(
-              round: @round,
-              current_player: @current_player
-            )
+            render VotingComponent.new(round: @round, current_player: @current_player)
           end
         end
       end

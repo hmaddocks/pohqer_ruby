@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddOwnerIdToGames < ActiveRecord::Migration[8.0]
   def change
     add_column :games, :owner_id, :integer
@@ -7,7 +9,7 @@ class AddOwnerIdToGames < ActiveRecord::Migration[8.0]
     # Data migration: Set owner_id based on owner_name
     reversible do |dir|
       dir.up do
-        execute <<-SQL
+        execute <<-SQL.squish
           UPDATE games
           SET owner_id = (
             SELECT id FROM players

@@ -23,7 +23,7 @@ class RoundResultsComponent < ApplicationComponent
         div(class: "grid grid-cols-2 md:grid-cols-3 gap-4") do
           @round.votes.includes(:player).find_each do |vote|
             div(class: "bg-gray-50 p-4 rounded") do
-              div(class: "font-medium") { vote.player.name }
+              div(class: "font-medium") { vote.player_name }
               div(class: "text-2xl font-bold text-blue-500") { vote.score }
             end
           end

@@ -11,14 +11,14 @@ Rails.application.routes.draw do
 
   root "games#index"
 
-  resources :games do
+  resources :games, except: %i[edit update destroy] do
     member do
       get :join
       post :add_player
       post :start_new_round
     end
 
-    resources :rounds, only: [ :create ] do
+    resources :rounds, only: [:create] do
       member do
         post :finish
         post :vote

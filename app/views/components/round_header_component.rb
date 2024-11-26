@@ -12,11 +12,7 @@ class RoundHeaderComponent < ApplicationComponent
     div(class: "flex justify-between items-center mb-6") do
       div do
         h2(class: "text-xl font-semibold") do
-          if @round.story_title.present?
-            plain @round.story_title
-          else
-            plain "Round #{@round.id}"
-          end
+          plain @round.story_title if @round.story_title? && @round.in_progress?
         end
 
         unless @round.pending?
@@ -36,19 +32,7 @@ class RoundHeaderComponent < ApplicationComponent
         end
       else
         form(action: game_rounds_path(@round.game), method: "post", class: "flex gap-2") do
-          if @round == @round.game.rounds.first && @round.pending?
-            input(
-              type: "text",
-              name: "round[story_title]",
-              class: "rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm",
-              required: true,
-              placeholder: "Enter story title"
-            )
-            button(
-              type: "submit",
-              class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            ) { "Start Round" }
-          else
+          div(class: "flex gap-2") do
             input(
               type: "text",
               name: "round[story_title]",

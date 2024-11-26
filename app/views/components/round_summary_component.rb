@@ -14,7 +14,7 @@ class RoundSummaryComponent < ApplicationComponent
           div(class: "flex space-x-4") do
             @round.votes.includes(:player).find_each do |vote|
               div(class: "text-sm text-gray-600") do
-                span { vote.player.name }
+                span { vote.player_name }
                 span(class: "mx-1") { ":" }
                 span(class: "font-medium") { vote.score }
               end

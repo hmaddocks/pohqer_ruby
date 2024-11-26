@@ -2,7 +2,7 @@
 
 class Player < ApplicationRecord
   belongs_to :game
-  has_many :votes, dependent: :destroy
+  has_many :votes, dependent: :delete_all
   has_many :rounds, through: :votes
 
   validates :name, presence: true
@@ -14,7 +14,5 @@ class Player < ApplicationRecord
     end
   end
 
-  def vote_for_round(round)
-    votes.find_by(round: round)
-  end
+  def vote_for_round(round) = votes.find_by(round: round)
 end

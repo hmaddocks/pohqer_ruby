@@ -10,29 +10,15 @@ class Game < ApplicationRecord
 
   before_validation :ensure_uuid, on: :create
 
-  def to_param
-    uuid
-  end
+  def to_param = uuid
 
-  def current_round
-    rounds.last
-  end
+  def current_round = rounds.last
 
-  def start_new_round(story_title: nil)
-    if story_title.present?
-      rounds.create!(story_title: story_title, status: :in_progress)
-    else
-      rounds.create!
-    end
-  end
+  def start_new_round(story_title: nil) = rounds.create!(story_title: story_title, status: :in_progress)
 
-  def voting_in_progress?
-    current_round&.in_progress?
-  end
+  def voting_in_progress? = current_round&.in_progress?
 
   private
 
-  def ensure_uuid
-    self.uuid ||= SecureRandom.uuid
-  end
+  def ensure_uuid = self.uuid ||= SecureRandom.uuid
 end
