@@ -60,7 +60,7 @@ end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "rubocop", "~> 1.68"
+  gem "rubocop", "~> 1.69"
   gem "rubocop-factory_bot", "~> 2.26"
   gem "rubocop-md", "~> 1.2"
   gem "rubocop-migration", "~> 0.5.1"
