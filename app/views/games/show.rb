@@ -2,8 +2,6 @@
 
 module Games
   class Show < ApplicationView
-    include Phlex::Rails::Helpers::TurboStreamFrom
-
     def initialize(game:, current_round:, current_player:)
       @game = game
       @current_round = current_round
