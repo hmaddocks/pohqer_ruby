@@ -11,12 +11,10 @@ class PlayerCardComponent < ApplicationComponent
     div(class: player_card_classes) do
       div(class: "font-medium") { @player.name }
 
-      if @current_round&.voting_in_progress?
-        if @vote
-          div(class: "text-sm text-green-500") { "Voted" }
-        else
-          div(class: "text-sm text-gray-500") { "Not voted" }
-        end
+      if @vote
+        div(class: "text-sm text-green-500") { "Voted" }
+      else
+        div(class: "text-sm text-gray-500") { "Not voted" }
       end
     end
   end

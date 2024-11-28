@@ -18,6 +18,7 @@ class GameComponent < ApplicationComponent
           render RoundComponent.new(round: @current_round, current_player: @current_player)
         end
       end
+
       div(class: "py-4") do
         render PlayersListComponent.new(game: @game, current_round: @current_round)
       end
