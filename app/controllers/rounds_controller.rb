@@ -22,8 +22,8 @@ class RoundsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.replace(
-            "voting-#{@round.id}",
-            VotingComponent.new(round: @round, current_player: @player)
+            "round-#{@round.id}",
+            RoundComponent.new(round: @round, current_player: @player)
           ),
           turbo_stream.replace(
             "game-#{@game.id}-players",

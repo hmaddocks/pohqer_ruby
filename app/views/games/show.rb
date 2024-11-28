@@ -12,7 +12,13 @@ module Games
       turbo_stream_from "game_#{@game.id}"
 
       div(class: "max-w-4xl mx-auto p-4") do
-        render GameComponent.new(game: @game, current_player: @current_player)
+        div(class: "py-4") do
+          render GameHeaderComponent.new(game: @game, current_player: @current_player)
+        end
+
+        div(class: "py-4") do
+          render GameComponent.new(game: @game, current_player: @current_player)
+        end
 
         # All rounds section
         div(class: "p-4") do
