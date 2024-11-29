@@ -1,23 +1,26 @@
 # frozen_string_literal: true
 
 class RoundSummaryComponent < ApplicationComponent
+  attr_reader :round
+
   def initialize(round:)
     @round = round
   end
 
   def view_template
     div(class: "bg-white shadow rounded p-4 mb-2") do
-      div(class: "flex justify-between items-center") do
-        div(class: "font-medium") { @round.story_title }
+      div(class: "flex justify-between items-baseline") do
+        div(class: "font-medium") { round.story_title }
 
-        if @round.votes.any?
-          div(class: "flex space-x-4") do
-            @round.votes.includes(:player).find_each do |vote|
-              div(class: "text-sm text-gray-600") do
-                span { vote.player_name }
-                span(class: "mx-1") { ":" }
-                span(class: "font-medium") { vote.score }
-              end
+        if round.votes.any?
+          div(class: "flex items-baseline space-x-4") do
+            if round.score.present?
+              span(class: "font-medium") { "Score: #{round.score}" }
+            elsif round.average_score.present?
+              span(class: "font-medium") { "Average: #{round.average_score}" }
+            end
+            span(class: "text-sm text-gray-500") do
+              plain "#{round.votes_count} #{'vote'.pluralize(round.votes_count)}"
             end
           end
         else
