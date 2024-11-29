@@ -36,7 +36,7 @@ class GamesController < ApplicationController
     end
 
     session["game_#{@game.id}_player_id"] = @player.id
-    redirect_to @game, notice: "Game was successfully created."
+    redirect_to @game
   rescue StandardError
     render Games::New.new(game: @game), status: :unprocessable_entity
   end
@@ -58,7 +58,7 @@ class GamesController < ApplicationController
         target: "game-#{@game.id}-players",
         html: PlayersListComponent.new(game: @game, current_round: @game.current_round).call
       )
-      redirect_to @game, notice: "Successfully joined the game."
+      redirect_to @game
     else
       render :join, status: :unprocessable_entity
     end

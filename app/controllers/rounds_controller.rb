@@ -6,12 +6,12 @@ class RoundsController < ApplicationController
 
   def create
     @round = @game.start_new_round(story_title: params[:round][:story_title])
-    redirect_to @game, notice: "New round started."
+    redirect_to @game
   end
 
   def finish
     @round.finish!
-    redirect_to @game, notice: "Round finished. Scores revealed!"
+    redirect_to @game
   end
 
   def vote
@@ -30,7 +30,7 @@ class RoundsController < ApplicationController
              PlayerCardComponent.new(player: @player, current_round: @round)
            )]
       end
-      format.html { redirect_to @game, notice: "Vote recorded." }
+      format.html { redirect_to @game }
     end
   end
 
@@ -43,10 +43,10 @@ class RoundsController < ApplicationController
             RoundComponent.new(round: @round, current_player: current_player)
           )
         end
-        format.html { redirect_to @game, notice: "Round score updated." }
+        format.html { redirect_to @game }
       end
     else
-      redirect_to @game, alert: "Failed to update round score."
+      redirect_to @game
     end
   end
 
