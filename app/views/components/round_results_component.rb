@@ -14,6 +14,7 @@ class RoundResultsComponent < ApplicationComponent
           div(class: "text-3xl font-bold text-blue-500") do
             plain "Average: #{@round.average_score}"
           end
+          div(class: "text-gray-500") { "#{@round.votes_count} votes" }
         else
           div(class: "text-gray-500") { "No votes recorded" }
         end

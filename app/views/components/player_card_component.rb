@@ -8,7 +8,7 @@ class PlayerCardComponent < ApplicationComponent
   end
 
   def view_template
-    div(class: player_card_classes) do
+    div(class: player_card_classes, id: dom_id(@player)) do
       div(class: "font-medium") { @player.name }
 
       if @vote

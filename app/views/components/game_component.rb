@@ -8,7 +8,7 @@ class GameComponent < ApplicationComponent
   end
 
   def view_template
-    div(class: "max-w-4xl mx-auto p-4") do
+    div(class: "max-w-4xl mx-auto") do
       div(class: "py-4") do
         render RoundComponent.new(round: @current_round, current_player: @current_player)
       end

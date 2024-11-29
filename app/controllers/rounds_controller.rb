@@ -20,16 +20,15 @@ class RoundsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.replace(
-            "round-#{@round.id}",
+        render turbo_stream:
+          [turbo_stream.replace(
+            "round_#{@round.id}",
             RoundComponent.new(round: @round, current_player: @player)
           ),
-          turbo_stream.replace(
-            "game-#{@game.id}-players",
-            PlayersListComponent.new(game: @game, current_round: @game.current_round)
-          )
-        ]
+           turbo_stream.replace(
+             "player_#{@player.id}",
+             PlayerCardComponent.new(player: @player, current_round: @round)
+           )]
       end
       format.html { redirect_to @game, notice: "Vote recorded." }
     end

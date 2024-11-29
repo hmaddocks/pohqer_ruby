@@ -9,7 +9,7 @@ class RoundComponent < ApplicationComponent
   end
 
   def view_template
-    turbo_frame_tag("round-#{round.id}") do
+    turbo_frame_tag(dom_id(round)) do
       div(class: "py-4") do
         div(class: "bg-white shadow rounded-lg p-6", data_controller: "round") do
           render RoundHeaderComponent.new(round: round)

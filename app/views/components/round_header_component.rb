@@ -12,13 +12,7 @@ class RoundHeaderComponent < ApplicationComponent
     div(class: "flex justify-between items-center mb-6") do
       div do
         h2(class: "text-xl font-semibold") do
-          plain @round.story_title if @round.story_title? && @round.in_progress?
-        end
-
-        unless @round.pending?
-          div(class: "text-sm text-gray-500") do
-            plain "#{@round.votes_count} votes"
-          end
+          plain @round.story_title if @round.story_title?
         end
       end
 
