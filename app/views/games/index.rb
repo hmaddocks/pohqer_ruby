@@ -29,7 +29,6 @@ module Games
           plain "Make sprint planning collaborative and fun"
         end
 
-        # Primary CTA
         div(class: "mt-8") do
           link_to(
             new_game_path,

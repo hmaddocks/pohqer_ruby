@@ -2,7 +2,7 @@
 
 class RoundsController < ApplicationController
   before_action :set_game
-  before_action :set_round, only: %i[finish vote]
+  before_action :set_round, only: %i[finish vote update]
 
   def create
     @round = @game.start_new_round(story_title: params[:round][:story_title])
@@ -34,6 +34,22 @@ class RoundsController < ApplicationController
     end
   end
 
+  def update
+    if @round.update(round_params)
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "round_#{@round.id}",
+            RoundComponent.new(round: @round, current_player: current_player)
+          )
+        end
+        format.html { redirect_to @game, notice: "Round score updated." }
+      end
+    else
+      redirect_to @game, alert: "Failed to update round score."
+    end
+  end
+
   private
 
   def set_game
@@ -42,5 +58,9 @@ class RoundsController < ApplicationController
 
   def set_round
     @round = @game.rounds.find(params[:id])
+  end
+
+  def round_params
+    params.require(:round).permit(:score)
   end
 end

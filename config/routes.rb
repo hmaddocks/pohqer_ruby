@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       post :start_new_round
     end
 
-    resources :rounds, only: [:create] do
+    resources :rounds, only: %i[create update] do
       member do
         post :finish
         post :vote

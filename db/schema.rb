@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_25_182820) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_29_192722) do
   create_table "games", force: :cascade do |t|
     t.string "owner_name", null: false
     t.string "title"
@@ -36,6 +36,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_25_182820) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0, null: false
+    t.integer "score"
     t.index ["game_id"], name: "index_rounds_on_game_id"
   end
 
