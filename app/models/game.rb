@@ -16,8 +16,6 @@ class Game < ApplicationRecord
 
   def start_new_round(story_title: nil) = rounds.create!(story_title: story_title, status: :in_progress)
 
-  def voting_in_progress? = current_round&.in_progress?
-
   private
 
   def ensure_uuid = self.uuid ||= SecureRandom.uuid

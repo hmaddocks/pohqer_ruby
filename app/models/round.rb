@@ -9,8 +9,6 @@ class Round < ApplicationRecord
 
   enum :status, { pending: 0, in_progress: 1, finished: 2 }
 
-  def voting_in_progress? = in_progress?
-
   def finish! = finished!
 
   def average_score

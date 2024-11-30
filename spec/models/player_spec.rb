@@ -1,9 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Player, type: :model do
-  # Include FactoryBot methods
-  include FactoryBot::Syntax::Methods
-
   # Subject for the Player model
   subject(:player) { build(:player) }
 
@@ -13,29 +12,28 @@ RSpec.describe Player, type: :model do
 
     it "is invalid without a name" do
       player.name = nil
-      is_expected.not_to be_valid
+      expect(subject).not_to be_valid
     end
   end
 
   # Associations
   describe "associations" do
     it "belongs to a game" do
-      is_expected.to respond_to(:game)
+      expect(subject).to respond_to(:game)
     end
 
     it "has many votes that are destroyed with the player" do
-      is_expected.to respond_to(:votes)
+      expect(subject).to respond_to(:votes)
       player = create(:player)
       create(:vote, player: player)
       expect { player.destroy }.to change { Vote.count }.by(-1)
     end
 
     it "has many rounds through votes" do
-      is_expected.to respond_to(:rounds)
+      expect(subject).to respond_to(:rounds)
     end
   end
 
-  # Instance methods
   describe "#vote_in_round" do
     let(:game) { create(:game) }
     let(:round) { create(:round, game: game) }

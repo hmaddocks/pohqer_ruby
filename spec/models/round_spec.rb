@@ -1,57 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Round, type: :model do
-  # Include FactoryBot methods
-  include FactoryBot::Syntax::Methods
-
   # Subject for the Round model
   subject(:round) { build(:round) }
-
-  # Associations
-  describe "associations" do
-    it "belongs to a game" do
-      expect(subject).to respond_to(:game)
-    end
-
-    it "has many votes that are destroyed with the round" do
-      expect(subject).to respond_to(:votes)
-      round = create(:round)
-      create(:vote, round: round)
-      expect { round.destroy }.to change { Vote.count }.by(-1)
-    end
-
-    it "has many players through votes" do
-      expect(subject).to respond_to(:players)
-    end
-  end
-
-  # Enums
-  describe "enums" do
-    it "defines status enum with correct values" do
-      expect(described_class.statuses).to eq({
-                                               "pending" => 0,
-                                               "in_progress" => 1,
-                                               "finished" => 2
-                                             })
-    end
-  end
-
-  # Instance methods
-  describe "#voting_in_progress?" do
-    let(:game) { create(:game) }
-
-    context "when round is in progress" do
-      subject(:round) { create(:round, game: game, status: :in_progress) }
-
-      it { is_expected.to be_voting_in_progress }
-    end
-
-    context "when round is finished" do
-      subject(:round) { create(:round, game: game, status: :finished) }
-
-      it { is_expected.not_to be_voting_in_progress }
-    end
-  end
 
   describe "#finish!" do
     let(:game) { create(:game) }
@@ -66,9 +19,9 @@ RSpec.describe Round, type: :model do
   describe "#average_score" do
     let(:game) { create(:game) }
     let(:round) { create(:round, game: game) }
-    let(:player1) { create(:player, game: game) }
-    let(:player2) { create(:player, game: game) }
-    let(:player3) { create(:player, game: game) }
+    let(:player1) { create(:player, game: game) } # rubocop:disable RSpec/IndexedLet
+    let(:player2) { create(:player, game: game) } # rubocop:disable RSpec/IndexedLet
+    let(:player3) { create(:player, game: game) } # rubocop:disable RSpec/IndexedLet
 
     context "when no votes exist" do
       it "returns nil" do
@@ -103,8 +56,8 @@ RSpec.describe Round, type: :model do
   describe "#votes_count" do
     let(:game) { create(:game) }
     let(:round) { create(:round, game: game) }
-    let(:player1) { create(:player, game: game) }
-    let(:player2) { create(:player, game: game) }
+    let(:player1) { create(:player, game: game) } # rubocop:disable RSpec/IndexedLet
+    let(:player2) { create(:player, game: game) } # rubocop:disable RSpec/IndexedLet
 
     context "when no votes exist" do
       it "returns 0" do

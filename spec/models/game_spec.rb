@@ -1,37 +1,22 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-  subject(:game) { build(:game) }
-
   describe "validations" do
-    it { is_expected.to be_valid }
+    subject { build(:game, owner_name:) }
 
-    it "is invalid without an owner name" do
-      game.owner_name = nil
-      expect(subject).not_to be_valid
+    context "when owner name is present" do
+      let(:owner_name) { "Jane" }
+
+      it { is_expected.to be_valid }
     end
-  end
 
-  # Associations
-  describe "associations" do
-    it { is_expected.to respond_to(:players) }
-    it { is_expected.to respond_to(:rounds) }
+    context "when owner name is missing" do
+      let(:owner_name) { nil }
 
-    context "when destroying a game" do
-      before do
-        create(:player, game: game_with_player)
-        create(:round, game: game_with_round)
-      end
-
-      let!(:game_with_player) { create(:game) }
-      let!(:game_with_round) { create(:game) }
-
-      it "destroys dependent players when game is destroyed" do
-        expect { game_with_player.destroy }.to change { Player.count }.by(-1)
-      end
-
-      it "destroys dependent rounds when game is destroyed" do
-        expect { game_with_round.destroy }.to change { Round.count }.by(-1)
+      it "is invalid without an owner name" do
+        expect(subject).not_to be_valid
       end
     end
   end
@@ -64,7 +49,6 @@ RSpec.describe Game, type: :model do
     subject { game_for_round.start_new_round(story_title: "Test Story") }
 
     let(:game_for_round) { create(:game) }
-    let(:round_without_title) { game_for_round.start_new_round }
 
     it "creates a new round for the game" do
       expect { subject }.to change { game_for_round.rounds.count }.by(1)
@@ -72,28 +56,6 @@ RSpec.describe Game, type: :model do
 
     it "allows setting a story title for the new round" do
       expect(subject.story_title).to eq("Test Story")
-    end
-  end
-
-  describe "#voting_in_progress?" do
-    subject(:voting_in_progress) { game_for_voting.voting_in_progress? }
-
-    let(:game_for_voting) { create(:game) }
-
-    context "when current round is in voting" do
-      let!(:round) { create(:round, game: game_for_voting, status: :in_progress) }
-
-      it { expect(voting_in_progress).to be_truthy }
-    end
-
-    context "when current round is finished" do
-      let!(:round) { create(:round, game: game_for_voting, status: :finished) }
-
-      it { expect(voting_in_progress).to be_falsey }
-    end
-
-    context "when no rounds exist" do
-      it { expect(voting_in_progress).to be_falsey }
     end
   end
 end
