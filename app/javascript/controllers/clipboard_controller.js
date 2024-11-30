@@ -7,10 +7,9 @@ export default class extends Controller {
 
   copy() {
     navigator.clipboard.writeText(this.textValue).then(() => {
-      // Optional: You could add some visual feedback here
       const originalText = this.element.textContent;
       this.element.textContent = "Copied!";
-      
+
       setTimeout(() => {
         this.element.textContent = originalText;
       }, 1000);
