@@ -53,11 +53,11 @@ class GamesController < ApplicationController
 
     if @player.save
       set_current_player(@player)
-      Turbo::StreamsChannel.broadcast_replace_to(
-        "game_#{@game.id}",
-        target: "game-#{@game.id}-players",
-        html: PlayersListComponent.new(game: @game, current_round: @game.current_round).call
-      )
+      # Turbo::StreamsChannel.broadcast_replace_to(
+      #   "game_#{@game.id}",
+      #   target: "game-#{@game.id}-players",
+      #   html: PlayersListComponent.new(game: @game, current_round: @game.current_round).call
+      # )
       redirect_to @game
     else
       render :join, status: :unprocessable_entity

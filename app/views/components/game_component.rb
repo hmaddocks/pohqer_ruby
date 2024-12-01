@@ -10,13 +10,15 @@ class GameComponent < ApplicationComponent
   end
 
   def view_template
-    div(class: "max-w-4xl mx-auto") do
-      div(class: "py-4") do
-        render RoundComponent.new(round:, current_player:)
-      end
+    turbo_frame_tag "game-#{@game.id}-round" do
+      div(class: "max-w-4xl mx-auto") do
+        div(class: "py-4") do
+          render RoundComponent.new(round:, current_player:)
+        end
 
-      div(class: "py-4") do
-        render PlayersListComponent.new(game:, current_round: round)
+        div(class: "py-4") do
+          render PlayersListComponent.new(game:, current_round: round)
+        end
       end
     end
   end

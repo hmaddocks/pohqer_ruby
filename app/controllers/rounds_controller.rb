@@ -19,17 +19,6 @@ class RoundsController < ApplicationController
     @player.vote_in_round(@round, params[:score].to_i)
 
     respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream:
-          [turbo_stream.replace(
-            "round_#{@round.id}",
-            RoundComponent.new(round: @round, current_player: @player)
-          ),
-           turbo_stream.replace(
-             "player_#{@player.id}",
-             PlayerCardComponent.new(player: @player, current_round: @round)
-           )]
-      end
       format.html { redirect_to @game }
     end
   end
@@ -37,12 +26,6 @@ class RoundsController < ApplicationController
   def update
     if @round.update(round_params)
       respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
-            "round_#{@round.id}",
-            RoundComponent.new(round: @round, current_player: current_player)
-          )
-        end
         format.html { redirect_to @game }
       end
     else
