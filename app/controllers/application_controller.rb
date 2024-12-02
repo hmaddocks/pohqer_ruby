@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_player, :current_game
 
+  layout -> { ApplicationLayout }
+
   private
 
   def current_player
