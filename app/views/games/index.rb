@@ -9,7 +9,7 @@ module Games
     end
 
     def view_template
-      div(class: "min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8") do
+      div(class: "min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8 mx-auto") do
         div(class: "max-w-5xl mx-auto space-y-12") do
           render_hero_section
           render_features_section

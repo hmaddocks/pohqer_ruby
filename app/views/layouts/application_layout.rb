@@ -18,7 +18,7 @@ class ApplicationLayout < ApplicationView
         # turbo?      end
 
         body do
-          main(class: "container mx-auto mt-28 px-5 flex", &block)
+          main(class: "container w-full mx-auto mt-28 flex", &block)
         end
       end
     end

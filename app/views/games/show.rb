@@ -11,7 +11,7 @@ module Games
     def view_template
       turbo_stream_from "game_#{@game.id}"
 
-      div(class: "max-w-4xl mx-auto") do
+      div(class: "max-w-5xl bg-gradient-to-b from-blue-50 to-white py-6 px-4 sm:px-6 lg:px-8 mx-auto") do
         div(class: "py-4") do
           render GameHeaderComponent.new(game: @game, current_player: @current_player)
         end
