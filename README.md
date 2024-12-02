@@ -1,5 +1,9 @@
 # README
 
+An experiemnt to build a SPA in Ruby on Rails 8 and Phlex view components.
+
+---
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
