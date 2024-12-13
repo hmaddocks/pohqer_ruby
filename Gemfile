@@ -66,7 +66,7 @@ group :development do
   gem "rubocop-migration", "~> 0.5.1"
   gem "rubocop-performance", "~> 1.23"
   gem "rubocop-rails", "~> 2.27"
-  gem "rubocop-rspec", "~> 3.2"
+  gem "rubocop-rspec", "~> 3.3"
   gem "rubocop-thread_safety", "~> 0.6.0"
 
   gem "active_record_doctor"
