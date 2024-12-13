@@ -328,7 +328,7 @@ GEM
       rubocop-minitest
       rubocop-performance
       rubocop-rails
-    rubocop-rspec (3.2.0)
+    rubocop-rspec (3.3.0)
       rubocop (~> 1.61)
     rubocop-thread_safety (0.6.0)
       rubocop (>= 1.48.1)
@@ -454,7 +454,7 @@ DEPENDENCIES
   rubocop-performance (~> 1.23)
   rubocop-rails (~> 2.27)
   rubocop-rails-omakase
-  rubocop-rspec (~> 3.2)
+  rubocop-rspec (~> 3.3)
   rubocop-thread_safety (~> 0.6.0)
   selenium-webdriver
   solid_cable
