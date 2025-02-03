@@ -83,4 +83,4 @@ end
 
 gem "phlex-rails", "~> 1.2"
 
-gem "tailwindcss-rails", "~> 3.1"
+gem "tailwindcss-rails", "~> 4.0"
